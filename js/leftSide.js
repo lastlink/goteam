@@ -40,7 +40,7 @@ $(document).ready(function () {
 				var issue = {
 					label: leftStateData["issue" + i],
 					value: leftStateData["value" + i],
-					toplic: leftStateData["topic" + i]
+					topic: leftStateData["topic" + i]
 				}
 				leftStateData.issues.push(issue)
 
@@ -53,6 +53,7 @@ $(document).ready(function () {
 			// add inputs
 			// 	<!-- 
 			var proposalHtml = "<h1>Proposal:</h1>"
+			var popupIsues=""
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				const element = leftStateData.issues[i];
 
@@ -63,11 +64,16 @@ $(document).ready(function () {
 	  <br> 
 			`
 
+			popupIsues+=``+element.label+`<br>Value:`+element.value+`<br>`
+
+
 			}
 
 
 			$("#proposal")
 				.html(proposalHtml);
+				$('#popupIssues')
+				    .html(popupIsues)
 
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				var slider = new Slider('#issue' + i + 1, {
