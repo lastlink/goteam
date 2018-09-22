@@ -106,7 +106,7 @@ $(document).ready(function () {
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "http://gameral.com/api/api.php/t_country/" + id,
+			"url": "https://gameral.com/api/api.php/t_country/" + id,
 			"method": "GET",
 			"headers": {}
 		}
@@ -133,7 +133,7 @@ $(document).ready(function () {
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "http://gameral.com/api/api.php/t_state/" + id,
+			"url": "https://gameral.com/api/api.php/t_state/" + id,
 			"method": "GET",
 			"headers": {}
 		}
