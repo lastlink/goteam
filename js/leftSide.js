@@ -14,29 +14,102 @@ $(document).ready(function () {
 	console.log("test")
 	var leftStateData = {};
 
+	var indexComparison = {
 
-	var rightCountryData= {}
+	};
+	function propose() {
+		console.log("eat my candy")
+	}
+	$("#propose").click(function () {
+		// alert( "Handler for .click() called." );
+		// $('#exampleModal').toggle()
+		console.log("computing game")
+		// reset comparison
+		indexComparison = {
+			trade: 0,
+			justice: 0,
+			intellectual_property: 0,
+			environment: 0,
+			unknown: 0
+		}
+		for (let i = 0; i < leftStateData.issues.length; i++) {
+			const element = leftStateData.issues[i];
+			// var selectedPer= $("#issue"+i+1).value
+			console.log(element)
+			// console.log(selectedPer)
+			switch (element.topic) {
+				case "Trade":
+					indexComparison.trade += element.per
+
+					break;
+				case "Justice":
+					indexComparison.justice += element.per
+
+					break;
+				case "IP":
+					indexComparison.intellectual_property += element.per
+
+					break;
+				case "Enviroment":
+					indexComparison.environment += element.per
+
+					break;
+
+				default:
+					indexComparison.unknown += element.per
+					break;
+			}
+
+		}
+		console.log(indexComparison)
+		console.log(rightCountryData)
+
+		var validP = true;
+		for (const key in indexComparison) {
+			if (indexComparison.hasOwnProperty(key)) {
+				console.log(key + ":" + indexComparison[key])
+				if (rightCountryData[key])
+					console.log(indexComparison[key] + ":" + rightCountryData[key])
+
+				if (rightCountryData[key] && (indexComparison[key] > rightCountryData[key] + 10 || indexComparison[key] < rightCountryData[key] - 10)) {
+					validP = false;
+					console.log(indexComparison[key] + ":" + rightCountryData[key])
+					break;
+				}
+				// const element = indexComparison[key];
+
+			}
+		}
+		// proposalResults
+		// run computation
+		if (validP)
+			$("#exampleModal").modal()
+		else
+			alert("your selection is too far off")
+
+	});
+	var rightCountryData = {}
 	function retrieveCountry(id) {
 
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "http://gameral.com/api/api.php/t_country/"+id,
+			"url": "http://gameral.com/api/api.php/t_country/" + id,
 			"method": "GET",
 			"headers": {}
 		}
 
 		$.ajax(settings).done(function (response) {
-			var rightCountryData=JSON.parse(response);
+			rightCountryData = JSON.parse(response);
 			console.log("country:")
 
 			console.log(rightCountryData);
-			var cIssues=""
-			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br>"
-			cIssues+="Trade:"+rightCountryData.trade+"<br>"
-			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
-			cIssues+="Justice:"+rightCountryData.justice+"<br>"
-			cIssues+="Enviroment:"+rightCountryData.enviroment
+			var cIssues = ""
+			cIssues += "<h3>Country:" + rightCountryData.country + "</h3><br>"
+			cIssues += "Trade:" + rightCountryData.trade + "<br>"
+			cIssues += "IP:" + rightCountryData.intellectual_property + "<br>"
+			cIssues += "Justice:" + rightCountryData.justice + "<br>"
+			cIssues += "Enviroment:" + rightCountryData.enviroment
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
@@ -57,7 +130,7 @@ $(document).ready(function () {
 			console.log("response")
 			// console.log(response);
 
-			var leftStateData = JSON.parse(response);
+			leftStateData = JSON.parse(response);
 			leftStateData.issues = []
 			$("#story").text(leftStateData.story)
 			// console.log("issues")
@@ -108,6 +181,7 @@ $(document).ready(function () {
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				var slider = new Slider('#issue' + i + 1, {
 					formatter: function (value) {
+						leftStateData.issues[i].per = value
 						return 'Current value: ' + value;
 					}
 				});
