@@ -1,0 +1,4 @@
+.DS*
+dist
+node_modules
+.cache
