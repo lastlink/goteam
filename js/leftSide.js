@@ -194,7 +194,7 @@ $(document).ready(function () {
 				var slider = new Slider('#issue' + i + 1, {
 					formatter: function (value) {
 						leftStateData.issues[i].per = value
-						return 'Current value: ' + value;
+						return 'Current '+leftStateData.issues[i].topic+' value: ' + value;
 					}
 				});
 			}
