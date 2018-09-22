@@ -28,7 +28,18 @@ $(document).ready(function () {
 
 		$.ajax(settings).done(function (response) {
 			var rightCountryData=JSON.parse(response);
+			console.log("country:")
+
 			console.log(rightCountryData);
+			var cIssues=""
+			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br>"
+			cIssues+="Trade:"+rightCountryData.trade+"<br>"
+			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
+			cIssues+="Justice:"+rightCountryData.justice+"<br>"
+			cIssues+="Enviroment:"+rightCountryData.enviroment
+			console.log(cIssues)
+			$("#popupCIssues")
+				.html(cIssues);
 
 		});
 	}
@@ -114,7 +125,7 @@ $(document).ready(function () {
 	});
 
 	updateProposal(1);
-	rightCountryData(1);
+	retrieveCountry(1);
 
 	$("#leftMap").click(function () {
 		updateProposal(1)
