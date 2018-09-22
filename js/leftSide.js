@@ -85,6 +85,15 @@ $(document).ready(function () {
 		})
 	}
 
+	$('#stateSelect').on('change', function() {
+		// alert( this.value );
+		var value=parseInt(this.value) ? this.value : 1
+		console.log(value)
+
+		updateProposal(value)
+
+	  });
+
 	updateProposal(1);
 
 	$("#leftMap").click(function () {

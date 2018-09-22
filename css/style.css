@@ -6,4 +6,7 @@
 	position:absolute;
 	top:0px;
 	background: white;
+	 color: white;
+        background-color: rgba(0, 0, 255, 0.5);
+        width: 23%
 }
