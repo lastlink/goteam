@@ -36,7 +36,7 @@ $(document).ready(function () {
 			cIssues+="Trade:"+rightCountryData.trade+"<br>"
 			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
 			cIssues+="Justice:"+rightCountryData.justice+"<br>"
-			cIssues+="Enviroment:"+rightCountryData.enviroment
+			cIssues+="Enviroment:"+rightCountryData.environment
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
