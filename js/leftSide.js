@@ -90,7 +90,7 @@ $(document).ready(function () {
 				proposalHtml += `
 			<h3>`+ element.label + `:</h3>
      <br> 
-	  <input id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + i + 1 + `Slider' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="100"/>
+	  <input id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + i + 1 + `Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
 	  <br> 
 			`
 
