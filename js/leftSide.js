@@ -73,11 +73,10 @@ $(document).ready(function () {
 		for (const key in indexComparison) {
 			if (indexComparison.hasOwnProperty(key)) {
 				console.log(key + ":" + indexComparison[key])
-				if (rightCountryData[key])
-					console.log(indexComparison[key] + ":" + rightCountryData[key])
 
-				if (rightCountryData[key] && (indexComparison[key] > rightCountryData[key] + 10 || indexComparison[key] < rightCountryData[key] - 10)) {
+				if (rightCountryData[key] && (indexComparison[key] > (parseInt(rightCountryData[key]) + 10) || indexComparison[key] < (parseInt(rightCountryData[key]) - 10))) {
 					validP = false;
+					console.log("is false")
 					console.log(indexComparison[key] + ":" + rightCountryData[key])
 					break;
 				}
