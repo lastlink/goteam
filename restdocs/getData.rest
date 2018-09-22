@@ -1,6 +1,5 @@
 ### get countries
-GET http://gameral.com/api/api.php/t_country HTTP/1.1
-Content-Type: application/json
+GET http://gameral.com/api/api.php/t_country/1 HTTP/1.1
 
 ### get states
 GET http://gameral.com/api/api.php/t_state/1 HTTP/1.1

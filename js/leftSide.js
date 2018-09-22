@@ -24,6 +24,7 @@ $( "#leftMap" ).click(function() {
 	  
 	  $.ajax(settings).done(function (response) {
 		console.log(response);
+		$( "#leftPopup" ).toggle();
 	  });
 	// alert( "Handler for leftMap .click() called." );
 	// console.log("leftMap")
