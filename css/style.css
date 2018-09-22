@@ -3,8 +3,8 @@
 }
 
 #leftPopup {
-	position:absolute;
-	top:0px;
+	position: absolute;
+	top:50px;
 	background: white;
 	 color: white;
         background-color: rgba(0, 0, 255, 0.5);
@@ -13,7 +13,7 @@
 
 #rightPopup {
 	position:absolute;
-	top:0px;
+	top:50px;
 	right:0px;
 	background: white;
 	 color: white;
