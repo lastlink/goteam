@@ -29,6 +29,7 @@ $(document).ready(function () {
 
 			var leftStateData = JSON.parse(response);
 			leftStateData.issues = []
+			$("#story").text(leftStateData.story)
 			// console.log("issues")
 
 			// console.log(leftStateData.issues);
