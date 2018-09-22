@@ -13,6 +13,25 @@ $(document).ready(function () {
 	// });
 	console.log("test")
 	var leftStateData = {};
+
+
+	var rightCountryData= {}
+	function retrieveCountry(id) {
+
+		var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "http://gameral.com/api/api.php/t_country/"+id,
+			"method": "GET",
+			"headers": {}
+		}
+
+		$.ajax(settings).done(function (response) {
+			var rightCountryData=JSON.parse(response);
+			console.log(rightCountryData);
+
+		});
+	}
 	function updateProposal(id) {
 
 		var settings = {
@@ -53,18 +72,18 @@ $(document).ready(function () {
 			// add inputs
 			// 	<!-- 
 			var proposalHtml = "<h1>Proposal:</h1>"
-			var popupIsues=""
+			var popupIsues = ""
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				const element = leftStateData.issues[i];
 
 				proposalHtml += `
 			<h3>`+ element.label + `:</h3>
      <br> 
-	  <input id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + i + 1 + `Slider' type="text" data-slider-min="0" data-slider-max="` + element.value * 2 + `" data-slider-step="1" data-slider-value="` + element.value + `"/>
+	  <input id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + i + 1 + `Slider' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="100"/>
 	  <br> 
 			`
 
-			popupIsues+=``+element.label+`<br>Value:`+element.value+`<br>`
+				popupIsues += `` + element.label + `<br>Value:` + element.value + `<br>`
 
 
 			}
@@ -72,8 +91,8 @@ $(document).ready(function () {
 
 			$("#proposal")
 				.html(proposalHtml);
-				$('#popupIssues')
-				    .html(popupIsues)
+			$('#popupIssues')
+				.html(popupIsues)
 
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				var slider = new Slider('#issue' + i + 1, {
@@ -85,16 +104,17 @@ $(document).ready(function () {
 		})
 	}
 
-	$('#stateSelect').on('change', function() {
+	$('#stateSelect').on('change', function () {
 		// alert( this.value );
-		var value=parseInt(this.value) ? this.value : 1
+		var value = parseInt(this.value) ? this.value : 1
 		console.log(value)
 
 		updateProposal(value)
 
-	  });
+	});
 
 	updateProposal(1);
+	rightCountryData(1);
 
 	$("#leftMap").click(function () {
 		updateProposal(1)
