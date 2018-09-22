@@ -2,6 +2,10 @@
 <html>
 <head>
   <title>Result</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+	<script src="js/leftSide.js"></script>
 </head>
 <body>
   <style>
@@ -26,8 +30,10 @@
   <center>
   <br /><br />
 <img src="logo2.png" alt="Logo">
-  <h1>You Score: 51%</h1>
+  {% comment %} <h1>You Score: 51%</h1> {% endcomment %}
   If you were the diplomat and did this deal we there would've been a 51% chance that Thailand will accpet it.<br />
+  		<p id="proposalResults"></p>
+
   <h6>Liked this? Let us tweet about it.</h6>
   <a href="https://twitter.com/intent/tweet?screen_name=StateDept&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @StateDept</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p><a href="index.html"><button class="btn default">Start a new game</button></a></p>
