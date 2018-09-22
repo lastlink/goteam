@@ -145,13 +145,13 @@ $(document).ready(function () {
 			console.log("country:")
 
 			console.log(rightCountryData);
-			var cIssues = ""
-			cIssues += "<h3>Country:" + rightCountryData.country + "</h3><br><br>"
-			cIssues += "Trade:" + rightCountryData.trade + "<br><br>"
-			cIssues += "IP:" + rightCountryData.intellectual_property + "<br><br>"
-			cIssues += "Justice:" + rightCountryData.justice + "<br><br>"
-			cIssues += "Environment:" + rightCountryData.enviroment
-			cIssues += `<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
+			var cIssues=""
+			//cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br><br>"
+			//cIssues+="Trade:"+rightCountryData.trade+"<br><br>"
+			//cIssues+="IP:"+rightCountryData.intellectual_property+"<br><br>"
+			//cIssues+="Justice:"+rightCountryData.justice+"<br><br>"
+			//cIssues+="Environment:"+rightCountryData.enviroment
+			cIssues+=`<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
 
 			console.log(cIssues)
 			$("#popupCIssues")
