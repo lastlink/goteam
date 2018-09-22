@@ -111,7 +111,9 @@ $(document).ready(function () {
 			Cookies.set('proposalResults', propResults, { expires: 7 });
 
 			console.log(Cookies.get('proposalResults'));
-			window.location.pathname = "./win.html";
+			// window.location.pathname = "./win.html";
+			window.location.href = './win.htm'; //one level up
+
 			// 	 console.log("statval:")
 			// console.log(	 Cookies.get('stateVal')); // => 'the_value'
 
