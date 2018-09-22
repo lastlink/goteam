@@ -214,10 +214,17 @@ $(document).ready(function () {
 	retrieveCountry(1);
 
 	$("#leftMap").click(function () {
-		updateProposal(1)
+		// updateProposal(1)
+		$.cookie('stateVal', 1, { expires: 7, path: '/',
+		 secure: true });
+
+		 console.log("statval:")
+	console.log(	 $.cookie('stateVal')); // => 'the_value'
+
+		 
 
 
-		$("#leftPopup").toggle();
+		// $("#leftPopup").toggle();
 	});
 	// alert( "Handler for leftMap .click() called." );
 	// console.log("leftMap")
