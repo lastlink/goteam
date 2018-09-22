@@ -37,7 +37,7 @@ $(document).ready(function () {
 			const element = leftStateData.issues[i];
 			// var selectedPer= $("#issue"+i+1).value
 			console.log(element)
-			propResults+=element.label+":"+element.value*(element.per/100)+"<br>"
+			propResults+=element.label+":"+Math.round(element.value*(element.per/100) * 100) / 100+"<br>"
 			// label: leftStateData["issue" + i],
 			// value: leftStateData["value" + i],
 			// topic: leftStateData["topic" + i]
@@ -70,12 +70,14 @@ $(document).ready(function () {
 		console.log(rightCountryData)
 
 		var validP = true;
+		var badTopic=""
 		for (const key in indexComparison) {
 			if (indexComparison.hasOwnProperty(key)) {
 				console.log(key + ":" + indexComparison[key])
 
 				if (rightCountryData[key] && (indexComparison[key] > (parseInt(rightCountryData[key]) + 10) || indexComparison[key] < (parseInt(rightCountryData[key]) - 10))) {
 					validP = false;
+					badTopic=key + " which was " + indexComparison[key] +". it needs to be within 10 of " + rightCountryData[key];
 					console.log("is false")
 					console.log(indexComparison[key] + ":" + rightCountryData[key])
 					break;
@@ -97,7 +99,7 @@ $(document).ready(function () {
 
 		}
 		else
-			alert("your selection is too far off")
+			alert("Your selection is too far off for " + badTopic+ ". Please try re-adjusting.")
 
 	});
 	var rightCountryData = {}
@@ -117,14 +119,49 @@ $(document).ready(function () {
 
 			console.log(rightCountryData);
 			var cIssues=""
-			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br>"
-			cIssues+="Trade:"+rightCountryData.trade+"<br>"
-			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
-			cIssues+="Justice:"+rightCountryData.justice+"<br>"
-			cIssues+="Enviroment:"+rightCountryData.enviroment
+			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br><br>"
+			cIssues+="Trade:"+rightCountryData.trade+"<br><br>"
+			cIssues+="IP:"+rightCountryData.intellectual_property+"<br><br>"
+			cIssues+="Justice:"+rightCountryData.justice+"<br><br>"
+			cIssues+="Environment:"+rightCountryData.enviroment
+			cIssues+=`<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
+
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
+
+            window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+
+                title:{
+                    text:"Country: Thailand"
+                },
+                axisX:{
+                    interval: 1
+                },
+                axisY2:{
+                    interlacedColor: "rgba(1,77,101,.2)",
+                    gridColor: "rgba(0, 0, 255, 0.5)",
+                    title: "Issues"
+                },
+                data: [{
+                    type: "bar",
+                    name: "companies",
+                    axisYType: "secondary",
+                    color: "#014D65",
+                    dataPoints: [
+                        { y: parseInt(rightCountryData.enviroment), label: "Environment" },
+                        { y: parseInt(rightCountryData.justice), label: "Justice" },
+                        { y: parseInt(rightCountryData.intellectual_property), label: "IP" },
+                        { y: parseInt(rightCountryData.trade), label: "Trade" }
+                    ]
+                }]
+            });
+            chart.render();
+
+            }
 
 		});
 	}
@@ -194,7 +231,7 @@ $(document).ready(function () {
 				var slider = new Slider('#issue' + i + 1, {
 					formatter: function (value) {
 						leftStateData.issues[i].per = value
-						return 'Current value: ' + value;
+						return 'Current '+leftStateData.issues[i].topic+' value: ' + value;
 					}
 				});
 			}
@@ -214,10 +251,17 @@ $(document).ready(function () {
 	retrieveCountry(1);
 
 	$("#leftMap").click(function () {
-		updateProposal(1)
+		// updateProposal(1)
+		$.cookie('stateVal', 1, { expires: 7, path: '/',
+		 secure: true });
+
+		 console.log("statval:")
+	console.log(	 $.cookie('stateVal')); // => 'the_value'
+
+		 
 
 
-		$("#leftPopup").toggle();
+		// $("#leftPopup").toggle();
 	});
 	// alert( "Handler for leftMap .click() called." );
 	// console.log("leftMap")

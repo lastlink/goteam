@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://canvasjs.com/html5-javascript-bar-chart/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<script>
+window.onload = function () {
+	
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	
+	title:{
+		text:"Fortune 500 Companies by Country"
+	},
+	axisX:{
+		interval: 1
+	},
+	axisY2:{
+		interlacedColor: "rgba(1,77,101,.2)",
+		gridColor: "rgba(1,77,101,.1)",
+		title: "Number of Companies"
+	},
+	data: [{
+		type: "bar",
+		name: "companies",
+		axisYType: "secondary",
+		color: "#014D65",
+		dataPoints: [
+			{ y: 3, label: "Sweden" },
+			{ y: 7, label: "Taiwan" },
+			{ y: 5, label: "Russia" },
+			{ y: 9, label: "Spain" },
+			{ y: 7, label: "Brazil" },
+			{ y: 7, label: "India" },
+			{ y: 9, label: "Italy" },
+			{ y: 8, label: "Australia" },
+			{ y: 11, label: "Canada" },
+			{ y: 15, label: "South Korea" },
+			{ y: 12, label: "Netherlands" },
+			{ y: 15, label: "Switzerland" },
+			{ y: 25, label: "Britain" },
+			{ y: 28, label: "Germany" },
+			{ y: 29, label: "France" },
+			{ y: 52, label: "Japan" },
+			{ y: 103, label: "China" },
+			{ y: 134, label: "US" }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"><div class="canvasjs-chart-container" style="position: relative; text-align: left; cursor: auto;"><canvas class="canvasjs-chart-canvas" width="1476" height="600" style="width: 738px; height: 300px; position: absolute;"></canvas><canvas class="canvasjs-chart-canvas" width="1476" height="600" style="width: 738px; height: 300px; position: absolute; -webkit-tap-highlight-color: transparent; cursor: default;"></canvas><div class="canvasjs-chart-toolbar" style="position: absolute; right: 1px; top: 1px; border: 1px solid transparent;"></div><div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 2px; z-index: 1000; pointer-events: none; display: none; border-radius: 0px; left: 96px; bottom: -274px; transition: left 0.1s ease-out 0s, bottom 0.1s ease-out 0s;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: &quot;Trebuchet MS&quot;, Helvetica, sans-serif; font-weight: normal; font-style: normal; font-size: 14px; color: black; text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px; text-align: left; border: 1px solid rgb(1, 77, 101); background: rgba(255, 255, 255, 0.9); text-indent: 0px; white-space: nowrap; border-radius: 0px; user-select: none;"><span style="color:#014D65;">Sweden:</span>&nbsp;&nbsp;3</div></div></div></div>
+<script src="./canvasjs.min.js"></script>
+
+<span style="position: absolute; left: 0px; top: -20000px; padding: 0px; margin: 0px; border: none; white-space: pre; line-height: normal; font-family: &quot;Trebuchet MS&quot;, Helvetica, sans-serif; font-size: 15px; font-weight: normal; display: none;">Mpgyi</span></body></html>
