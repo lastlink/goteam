@@ -14,20 +14,105 @@ $(document).ready(function () {
 	console.log("test")
 	var leftStateData = {};
 
+	var indexComparison = {
 
-	var rightCountryData= {}
+	};
+	function propose() {
+		console.log("eat my candy")
+	}
+	$("#propose").click(function () {
+		// alert( "Handler for .click() called." );
+		// $('#exampleModal').toggle()
+		console.log("computing game")
+		// reset comparison
+		indexComparison = {
+			trade: 0,
+			justice: 0,
+			intellectual_property: 0,
+			enviroment: 0,
+			unknown: 0
+		}
+		var propResults=""
+		for (let i = 0; i < leftStateData.issues.length; i++) {
+			const element = leftStateData.issues[i];
+			// var selectedPer= $("#issue"+i+1).value
+			console.log(element)
+			propResults+=element.label+":"+element.value*(element.per/100)+"<br>"
+			// label: leftStateData["issue" + i],
+			// value: leftStateData["value" + i],
+			// topic: leftStateData["topic" + i]
+			// console.log(selectedPer)
+			switch (element.topic) {
+				case "Trade":
+					indexComparison.trade += element.per
+
+					break;
+				case "Justice":
+					indexComparison.justice += element.per
+
+					break;
+				case "IP":
+					indexComparison.intellectual_property += element.per
+
+					break;
+				case "Enviroment":
+					indexComparison.enviroment += element.per
+
+					break;
+
+				default:
+					indexComparison.unknown += element.per
+					break;
+			}
+
+		}
+		console.log(indexComparison)
+		console.log(rightCountryData)
+
+		var validP = true;
+		for (const key in indexComparison) {
+			if (indexComparison.hasOwnProperty(key)) {
+				console.log(key + ":" + indexComparison[key])
+
+				if (rightCountryData[key] && (indexComparison[key] > (parseInt(rightCountryData[key]) + 10) || indexComparison[key] < (parseInt(rightCountryData[key]) - 10))) {
+					validP = false;
+					console.log("is false")
+					console.log(indexComparison[key] + ":" + rightCountryData[key])
+					break;
+				}
+				// const element = indexComparison[key];
+
+			}
+		}
+		
+		// proposalResults
+		// run computation
+		if (validP){
+			// for (let i = 0; i < leftStateData.issues.length; i++) {
+			// 	const element = leftStateData.issues[i];
+				
+			// }
+			$("#proposalResults").html(propResults)
+			$("#exampleModal").modal()
+
+		}
+		else
+			alert("your selection is too far off")
+
+	});
+	var rightCountryData = {}
 	function retrieveCountry(id) {
 
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "http://gameral.com/api/api.php/t_country/"+id,
+			"url": "https://gameral.com/api/api.php/t_country/" + id,
 			"method": "GET",
 			"headers": {}
 		}
 
 		$.ajax(settings).done(function (response) {
-			var rightCountryData=JSON.parse(response);
+			rightCountryData = JSON.parse(response);
 			console.log("country:")
 
 			console.log(rightCountryData);
@@ -38,6 +123,7 @@ $(document).ready(function () {
 			cIssues+="Justice:"+rightCountryData.justice+"<br><br>"
 			cIssues+="Environment:"+rightCountryData.enviroment
 			cIssues+=`<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
+
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
@@ -82,7 +168,7 @@ $(document).ready(function () {
 		var settings = {
 			"async": true,
 			"crossDomain": true,
-			"url": "http://gameral.com/api/api.php/t_state/" + id,
+			"url": "https://gameral.com/api/api.php/t_state/" + id,
 			"method": "GET",
 			"headers": {}
 		}
@@ -91,7 +177,7 @@ $(document).ready(function () {
 			console.log("response")
 			// console.log(response);
 
-			var leftStateData = JSON.parse(response);
+			leftStateData = JSON.parse(response);
 			leftStateData.issues = []
 			$("#story").text(leftStateData.story)
 			// console.log("issues")
@@ -142,7 +228,8 @@ $(document).ready(function () {
 			for (let i = 0; i < leftStateData.issues.length; i++) {
 				var slider = new Slider('#issue' + i + 1, {
 					formatter: function (value) {
-						return 'Current value: ' + value;
+						leftStateData.issues[i].per = value
+						return 'Current '+leftStateData.issues[i].topic+' value: ' + value;
 					}
 				});
 			}
@@ -162,10 +249,17 @@ $(document).ready(function () {
 	retrieveCountry(1);
 
 	$("#leftMap").click(function () {
-		updateProposal(1)
+		// updateProposal(1)
+		$.cookie('stateVal', 1, { expires: 7, path: '/',
+		 secure: true });
+
+		 console.log("statval:")
+	console.log(	 $.cookie('stateVal')); // => 'the_value'
+
+		 
 
 
-		$("#leftPopup").toggle();
+		// $("#leftPopup").toggle();
 	});
 	// alert( "Handler for leftMap .click() called." );
 	// console.log("leftMap")

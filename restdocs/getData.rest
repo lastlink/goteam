@@ -1,7 +1,7 @@
 ### get countries
-GET http://gameral.com/api/api.php/t_country/1 HTTP/1.1
+GET https://gameral.com/api/api.php/t_country/1 HTTP/1.1
 
 ### get states
-GET http://gameral.com/api/api.php/t_state/1 HTTP/1.1
+GET https://gameral.com/api/api.php/t_state/1 HTTP/1.1
 
 ###
