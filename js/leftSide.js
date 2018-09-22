@@ -12,6 +12,7 @@ $( document ).ready(function() {
 	// 	}
 	// });
 console.log("test")
+var leftStateData={};
 
 $( "#leftMap" ).click(function() {
 	var settings = {
@@ -23,7 +24,32 @@ $( "#leftMap" ).click(function() {
 	  }
 	  
 	  $.ajax(settings).done(function (response) {
-		console.log(response);
+		  console.log("response")
+		// console.log(response);
+
+		var  leftStateData=JSON.parse(response);
+		leftStateData.issues=[]
+		// console.log("issues")
+
+		// console.log(leftStateData.issues);
+
+		var issueSize = 6;
+
+		for (let i = 1; i <= issueSize; i++) {
+			var issue={
+				label:leftStateData["issue"+i],
+				value:leftStateData["value"+i],
+				toplic:leftStateData["topic"+i]
+			}
+			leftStateData.issues.push(issue)
+
+		}
+		
+		// response.issues.
+		console.log("leftStateData:")
+
+		console.log(leftStateData);
+
 		$( "#leftPopup" ).toggle();
 	  });
 	// alert( "Handler for leftMap .click() called." );
