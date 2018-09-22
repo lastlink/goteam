@@ -37,7 +37,7 @@ $(document).ready(function () {
 			const element = leftStateData.issues[i];
 			// var selectedPer= $("#issue"+i+1).value
 			console.log(element)
-			propResults+=element.label+":"+element.value*(element.per/100)+"<br>"
+			propResults+=element.label+":"+Math.round(element.value*(element.per/100) * 100) / 100+"<br>"
 			// label: leftStateData["issue" + i],
 			// value: leftStateData["value" + i],
 			// topic: leftStateData["topic" + i]
@@ -70,12 +70,14 @@ $(document).ready(function () {
 		console.log(rightCountryData)
 
 		var validP = true;
+		var badTopic=""
 		for (const key in indexComparison) {
 			if (indexComparison.hasOwnProperty(key)) {
 				console.log(key + ":" + indexComparison[key])
 
 				if (rightCountryData[key] && (indexComparison[key] > (parseInt(rightCountryData[key]) + 10) || indexComparison[key] < (parseInt(rightCountryData[key]) - 10))) {
 					validP = false;
+					badTopic=key + " which was " + indexComparison[key] +". it needs to be within 10 of " + rightCountryData[key];
 					console.log("is false")
 					console.log(indexComparison[key] + ":" + rightCountryData[key])
 					break;
@@ -97,7 +99,7 @@ $(document).ready(function () {
 
 		}
 		else
-			alert("your selection is too far off")
+			alert("Your selection is too far off for " + badTopic+ ". Please try re-adjusting.")
 
 	});
 	var rightCountryData = {}
