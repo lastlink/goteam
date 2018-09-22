@@ -29,13 +29,18 @@ $(document).ready(function () {
 			trade: 0,
 			justice: 0,
 			intellectual_property: 0,
-			environment: 0,
+			enviroment: 0,
 			unknown: 0
 		}
+		var propResults=""
 		for (let i = 0; i < leftStateData.issues.length; i++) {
 			const element = leftStateData.issues[i];
 			// var selectedPer= $("#issue"+i+1).value
 			console.log(element)
+			propResults+=element.label+":"+element.value*(element.per/100)+"<br>"
+			// label: leftStateData["issue" + i],
+			// value: leftStateData["value" + i],
+			// topic: leftStateData["topic" + i]
 			// console.log(selectedPer)
 			switch (element.topic) {
 				case "Trade":
@@ -51,7 +56,7 @@ $(document).ready(function () {
 
 					break;
 				case "Enviroment":
-					indexComparison.environment += element.per
+					indexComparison.enviroment += element.per
 
 					break;
 
@@ -80,10 +85,18 @@ $(document).ready(function () {
 
 			}
 		}
+		
 		// proposalResults
 		// run computation
-		if (validP)
+		if (validP){
+			// for (let i = 0; i < leftStateData.issues.length; i++) {
+			// 	const element = leftStateData.issues[i];
+				
+			// }
+			$("#proposalResults").html(propResults)
 			$("#exampleModal").modal()
+
+		}
 		else
 			alert("your selection is too far off")
 
@@ -109,7 +122,7 @@ $(document).ready(function () {
 			cIssues+="Trade:"+rightCountryData.trade+"<br>"
 			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
 			cIssues+="Justice:"+rightCountryData.justice+"<br>"
-			cIssues+="Enviroment:"+rightCountryData.environment
+			cIssues+="Enviroment:"+rightCountryData.enviroment
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
