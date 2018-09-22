@@ -104,12 +104,12 @@ $(document).ready(function () {
 			console.log("country:")
 
 			console.log(rightCountryData);
-			var cIssues = ""
-			cIssues += "<h3>Country:" + rightCountryData.country + "</h3><br>"
-			cIssues += "Trade:" + rightCountryData.trade + "<br>"
-			cIssues += "IP:" + rightCountryData.intellectual_property + "<br>"
-			cIssues += "Justice:" + rightCountryData.justice + "<br>"
-			cIssues += "Enviroment:" + rightCountryData.enviroment
+			var cIssues=""
+			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br>"
+			cIssues+="Trade:"+rightCountryData.trade+"<br>"
+			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
+			cIssues+="Justice:"+rightCountryData.justice+"<br>"
+			cIssues+="Enviroment:"+rightCountryData.environment
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
