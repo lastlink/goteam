@@ -32,14 +32,48 @@ $(document).ready(function () {
 
 			console.log(rightCountryData);
 			var cIssues=""
-			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br>"
-			cIssues+="Trade:"+rightCountryData.trade+"<br>"
-			cIssues+="IP:"+rightCountryData.intellectual_property+"<br>"
-			cIssues+="Justice:"+rightCountryData.justice+"<br>"
-			cIssues+="Enviroment:"+rightCountryData.environment
+			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br><br>"
+			cIssues+="Trade:"+rightCountryData.trade+"<br><br>"
+			cIssues+="IP:"+rightCountryData.intellectual_property+"<br><br>"
+			cIssues+="Justice:"+rightCountryData.justice+"<br><br>"
+			cIssues+="Environment:"+rightCountryData.enviroment
+			cIssues+=`<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
+
+            window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+
+                title:{
+                    text:"Country: Thailand"
+                },
+                axisX:{
+                    interval: 1
+                },
+                axisY2:{
+                    interlacedColor: "rgba(1,77,101,.2)",
+                    gridColor: "rgba(0, 0, 255, 0.5)",
+                    title: "Issues"
+                },
+                data: [{
+                    type: "bar",
+                    name: "companies",
+                    axisYType: "secondary",
+                    color: "#014D65",
+                    dataPoints: [
+                        { y: parseInt(rightCountryData.enviroment), label: "Environment" },
+                        { y: parseInt(rightCountryData.justice), label: "Justice" },
+                        { y: parseInt(rightCountryData.intellectual_property), label: "IP" },
+                        { y: parseInt(rightCountryData.trade), label: "Trade" }
+                    ]
+                }]
+            });
+            chart.render();
+
+            }
 
 		});
 	}
