@@ -32,12 +32,12 @@ $(document).ready(function () {
 			enviroment: 0,
 			unknown: 0
 		}
-		var propResults=""
+		var propResults = ""
 		for (let i = 0; i < leftStateData.issues.length; i++) {
 			const element = leftStateData.issues[i];
 			// var selectedPer= $("#issue"+i+1).value
 			console.log(element)
-			propResults+=element.label+":"+Math.round(element.value*(element.per/100) * 100) / 100+"<br>"
+			propResults += element.label + ":" + Math.round(element.value * (element.per / 100) * 100) / 100 + "<br>"
 			// label: leftStateData["issue" + i],
 			// value: leftStateData["value" + i],
 			// topic: leftStateData["topic" + i]
@@ -70,38 +70,65 @@ $(document).ready(function () {
 		console.log(rightCountryData)
 
 		var validP = true;
-		var badTopic=""
+		var badTopic = ""
 		for (const key in indexComparison) {
 			if (indexComparison.hasOwnProperty(key)) {
 				console.log(key + ":" + indexComparison[key])
 
 				if (rightCountryData[key] && (indexComparison[key] > (parseInt(rightCountryData[key]) + 10) || indexComparison[key] < (parseInt(rightCountryData[key]) - 10))) {
 					validP = false;
-					badTopic=key + " which was " + indexComparison[key] +". it needs to be within 10 of " + rightCountryData[key];
+					badTopic = key + " which was " + indexComparison[key] + ". it needs to be within 10 of " + rightCountryData[key];
 					console.log("is false")
 					console.log(indexComparison[key] + ":" + rightCountryData[key])
+
+					// for (let i = 0; i < leftStateData.issues.length; i++) {
+					// 	const element = leftStateData.issues[i];
+
+					// }
+					// var test = $("#issue4Slider > .slider-handle")
+					// add red class if of bad topic
+					// test.addClass( "red" );
+
+					// test.addClass( "red" );
+					// 
 					break;
 				}
 				// const element = indexComparison[key];
 
 			}
 		}
-		
+
 		// proposalResults
 		// run computation
-		if (validP){
+		if (validP) {
 			// for (let i = 0; i < leftStateData.issues.length; i++) {
 			// 	const element = leftStateData.issues[i];
-				
+
 			// }
-			$("#proposalResults").html(propResults)
-			$("#exampleModal").modal()
+			// $("#proposalResults").html(propResults)
+
+
+			Cookies.set('proposalResults', propResults, { expires: 7 });
+
+			console.log(Cookies.get('proposalResults'));
+			window.location.pathname = "success.html";
+			// 	 console.log("statval:")
+			// console.log(	 Cookies.get('stateVal')); // => 'the_value'
+
+			// $("#exampleModal").modal()
 
 		}
 		else
-			alert("Your selection is too far off for " + badTopic+ ". Please try re-adjusting.")
+			alert("Your selection is too far off for " + badTopic + ". Please try re-adjusting.")
 
 	});
+
+	function setResults() {
+		var results = Cookies.get('proposalResults');
+		if (results)
+			$("#proposalResults").html(results)
+	}
+	setResults();
 	var rightCountryData = {}
 	function retrieveCountry(id) {
 
@@ -118,50 +145,50 @@ $(document).ready(function () {
 			console.log("country:")
 
 			console.log(rightCountryData);
-			var cIssues=""
-			cIssues+="<h3>Country:"+rightCountryData.country+"</h3><br><br>"
-			cIssues+="Trade:"+rightCountryData.trade+"<br><br>"
-			cIssues+="IP:"+rightCountryData.intellectual_property+"<br><br>"
-			cIssues+="Justice:"+rightCountryData.justice+"<br><br>"
-			cIssues+="Environment:"+rightCountryData.enviroment
-			cIssues+=`<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
+			var cIssues = ""
+			cIssues += "<h3>Country:" + rightCountryData.country + "</h3><br><br>"
+			cIssues += "Trade:" + rightCountryData.trade + "<br><br>"
+			cIssues += "IP:" + rightCountryData.intellectual_property + "<br><br>"
+			cIssues += "Justice:" + rightCountryData.justice + "<br><br>"
+			cIssues += "Environment:" + rightCountryData.enviroment
+			cIssues += `<div id="chartContainer" style="height: 300px; width: 100%;"></div>`
 
 			console.log(cIssues)
 			$("#popupCIssues")
 				.html(cIssues);
 
-            window.onload = function () {
+			window.onload = function () {
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
+				var chart = new CanvasJS.Chart("chartContainer", {
+					animationEnabled: true,
 
-                title:{
-                    text:"Country: Thailand"
-                },
-                axisX:{
-                    interval: 1
-                },
-                axisY2:{
-                    interlacedColor: "rgba(1,77,101,.2)",
-                    gridColor: "rgba(0, 0, 255, 0.5)",
-                    title: "Issues"
-                },
-                data: [{
-                    type: "bar",
-                    name: "companies",
-                    axisYType: "secondary",
-                    color: "#014D65",
-                    dataPoints: [
-                        { y: parseInt(rightCountryData.enviroment), label: "Environment" },
-                        { y: parseInt(rightCountryData.justice), label: "Justice" },
-                        { y: parseInt(rightCountryData.intellectual_property), label: "IP" },
-                        { y: parseInt(rightCountryData.trade), label: "Trade" }
-                    ]
-                }]
-            });
-            chart.render();
+					title: {
+						text: "Country: Thailand"
+					},
+					axisX: {
+						interval: 1
+					},
+					axisY2: {
+						interlacedColor: "rgba(1,77,101,.2)",
+						gridColor: "rgba(0, 0, 255, 0.5)",
+						title: "Issues"
+					},
+					data: [{
+						type: "bar",
+						name: "companies",
+						axisYType: "secondary",
+						color: "#014D65",
+						dataPoints: [
+							{ y: parseInt(rightCountryData.enviroment), label: "Environment" },
+							{ y: parseInt(rightCountryData.justice), label: "Justice" },
+							{ y: parseInt(rightCountryData.intellectual_property), label: "IP" },
+							{ y: parseInt(rightCountryData.trade), label: "Trade" }
+						]
+					}]
+				});
+				chart.render();
 
-            }
+			}
 
 		});
 	}
@@ -212,7 +239,7 @@ $(document).ready(function () {
 				proposalHtml += `
 			<h3>`+ element.label + `:</h3>
      <br> 
-	  <input id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + i + 1 + `Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+	  <input  style="color: red; background-color:red" id="issue`+ i + 1 + `" width:'100%' data-slider-id='issue` + (parseInt(i) + 1) + `Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
 	  <br> 
 			`
 
@@ -231,7 +258,7 @@ $(document).ready(function () {
 				var slider = new Slider('#issue' + i + 1, {
 					formatter: function (value) {
 						leftStateData.issues[i].per = value
-						return 'Current '+leftStateData.issues[i].topic+' value: ' + value;
+						return 'Current ' + leftStateData.issues[i].topic + ' value: ' + value;
 					}
 				});
 			}
@@ -252,13 +279,16 @@ $(document).ready(function () {
 
 	$("#leftMap").click(function () {
 		// updateProposal(1)
-		$.cookie('stateVal', 1, { expires: 7, path: '/',
-		 secure: true });
+		// $.cookie('stateVal', 1, { expires: 7, path: '/',
+		//  secure: true });
 
-		 console.log("statval:")
-	console.log(	 $.cookie('stateVal')); // => 'the_value'
+		//  Cookies.set('stateVal', '1', { expires: 7 });
 
-		 
+
+		//  console.log("statval:")
+		// console.log(	 Cookies.get('stateVal')); // => 'the_value'
+
+
 
 
 		// $("#leftPopup").toggle();
